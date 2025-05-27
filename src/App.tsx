@@ -10,6 +10,9 @@ import ClientPricing from "./pages/ClientPricing";
 import MarginSimulator from "./pages/MarginSimulator";
 import FeeCalculator from "./pages/FeeCalculator";
 import Settings from "./pages/Settings";
+import ScenarioEditor from "./pages/ScenarioEditor";
+import ScenarioReview from "./pages/ScenarioReview";
+import FeeCalculatorDetailed from "./pages/FeeCalculatorDetailed";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +29,9 @@ const App = () => (
           <Route path="/client-pricing" element={<ClientPricing />} />
           <Route path="/margin-simulator" element={<MarginSimulator />} />
           <Route path="/calculator" element={<FeeCalculator />} />
+          <Route path="/scenario-editor" element={<ScenarioEditor />} />
+          <Route path="/scenario-review" element={<ScenarioReview />} />
+          <Route path="/fee-calculator-detailed" element={<FeeCalculatorDetailed />} />
           <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

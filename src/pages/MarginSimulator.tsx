@@ -1,4 +1,3 @@
-
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BarChart3, TrendingDown, AlertTriangle, Play, Edit, Eye, CheckCircle, Calculator } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/sonner";
 
 const MarginSimulator = () => {
+  const navigate = useNavigate();
   const [scenarios, setScenarios] = useState([
     {
       id: 1,
@@ -45,26 +46,15 @@ const MarginSimulator = () => {
   const [simulationsRun, setSimulationsRun] = useState(142);
 
   const handleNewSimulation = () => {
-    toast.success("New Simulation", {
-      description: "Opening scenario creation wizard..."
-    });
-    console.log("Creating new simulation scenario");
+    navigate('/scenario-editor');
   };
 
   const handleEditScenario = (scenarioId: number) => {
-    const scenario = scenarios.find(s => s.id === scenarioId);
-    toast.info("Edit Scenario", {
-      description: `Opening editor for "${scenario?.name}"`
-    });
-    console.log(`Editing scenario ${scenarioId}:`, scenario);
+    navigate(`/scenario-editor?id=${scenarioId}`);
   };
 
   const handleReviewScenario = (scenarioId: number) => {
-    const scenario = scenarios.find(s => s.id === scenarioId);
-    toast.info("Review Scenario", {
-      description: `Reviewing details for "${scenario?.name}"`
-    });
-    console.log(`Reviewing scenario ${scenarioId}:`, scenario);
+    navigate(`/scenario-review?id=${scenarioId}`);
   };
 
   const handleRunScenario = (scenarioId: number) => {
@@ -109,11 +99,7 @@ const MarginSimulator = () => {
   };
 
   const handleCalculateFees = (scenarioId: number) => {
-    const scenario = scenarios.find(s => s.id === scenarioId);
-    toast.info("Fee Calculation", {
-      description: `Calculating detailed fee impact for "${scenario?.name}"`
-    });
-    console.log(`Calculating fees for scenario ${scenarioId}:`, scenario);
+    navigate(`/fee-calculator-detailed?scenarioId=${scenarioId}`);
   };
 
   return (
