@@ -1,4 +1,3 @@
-
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -71,21 +70,15 @@ const SchemeCost = () => {
   };
 
   const handleAIAnalysis = () => {
-    toast.success("🧠 Deep AI Analysis", {
-      description: "Running comprehensive anomaly detection across all invoices..."
-    });
+    navigate('/ai-performance');
   };
 
   const handlePredictiveAlert = () => {
-    toast.success("🔮 AI Prediction Mode", {
-      description: "Setting up proactive alerts for future anomalies..."
-    });
+    navigate('/predictive-alerts');
   };
 
   const handleBulkReconciliation = () => {
-    toast.success("⚡ AI Bulk Processing", {
-      description: "Processing 47 pending invoices with AI reconciliation..."
-    });
+    navigate('/bulk-processing');
   };
 
   return (

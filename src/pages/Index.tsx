@@ -1,4 +1,3 @@
-
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { AssistantCard } from "@/components/AssistantCard";
@@ -15,33 +14,23 @@ const Index = () => {
   const navigate = useNavigate();
 
   const handleGenerateReport = () => {
-    toast.success("🤖 AI Agent Working", {
-      description: "Your reporting agent is analyzing data and generating insights..."
-    });
+    navigate('/ai-performance');
   };
 
   const handleRunAnomalyDetection = () => {
-    toast.success("🔍 Detection Agent Activated", {
-      description: "AI anomaly detection agent is scanning all transactions..."
-    });
+    navigate('/predictive-alerts');
   };
 
   const handleExportPricingModels = () => {
-    toast.success("📊 Export Agent Running", {
-      description: "Pricing model export agent is preparing your data..."
-    });
+    navigate('/bulk-processing');
   };
 
   const handleAskAllAgents = () => {
-    toast.success("🧠 Multi-Agent Consultation", {
-      description: "Asking all AI agents for cross-functional insights..."
-    });
+    navigate('/agent-chat');
   };
 
   const handleAgentTraining = () => {
-    toast.success("🎓 AI Training Mode", {
-      description: "Training agents with latest market data and user feedback..."
-    });
+    navigate('/ai-training');
   };
 
   const assistants = [
@@ -293,21 +282,21 @@ const Index = () => {
                     onClick={handleGenerateReport}
                   >
                     <Bot className="w-4 h-4" />
-                    → Generate Monthly Report with AI
+                    → View AI Performance Metrics
                   </button>
                   <button 
                     className="w-full text-left text-sm hover:bg-white/10 p-3 rounded transition-colors flex items-center gap-2"
                     onClick={handleRunAnomalyDetection}
                   >
                     <Bot className="w-4 h-4" />
-                    → Run AI Anomaly Detection
+                    → Access Predictive Alerts
                   </button>
                   <button 
                     className="w-full text-left text-sm hover:bg-white/10 p-3 rounded transition-colors flex items-center gap-2"
                     onClick={handleExportPricingModels}
                   >
                     <Bot className="w-4 h-4" />
-                    → Export Pricing Models with AI
+                    → Start Bulk Processing
                   </button>
                 </div>
               </div>

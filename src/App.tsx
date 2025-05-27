@@ -15,6 +15,11 @@ import ScenarioReview from "./pages/ScenarioReview";
 import FeeCalculatorDetailed from "./pages/FeeCalculatorDetailed";
 import AnomalyReview from "./pages/AnomalyReview";
 import AnomalyResolution from "./pages/AnomalyResolution";
+import AIPerformance from "./pages/AIPerformance";
+import AITraining from "./pages/AITraining";
+import AgentChat from "./pages/AgentChat";
+import PredictiveAlerts from "./pages/PredictiveAlerts";
+import BulkProcessing from "./pages/BulkProcessing";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +41,11 @@ const App = () => (
           <Route path="/fee-calculator-detailed" element={<FeeCalculatorDetailed />} />
           <Route path="/anomaly-review" element={<AnomalyReview />} />
           <Route path="/anomaly-resolution" element={<AnomalyResolution />} />
+          <Route path="/ai-performance" element={<AIPerformance />} />
+          <Route path="/ai-training" element={<AITraining />} />
+          <Route path="/agent-chat" element={<AgentChat />} />
+          <Route path="/predictive-alerts" element={<PredictiveAlerts />} />
+          <Route path="/bulk-processing" element={<BulkProcessing />} />
           <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
