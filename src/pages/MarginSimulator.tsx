@@ -4,10 +4,12 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { BarChart3, TrendingDown, AlertTriangle, Play } from "lucide-react";
+import { BarChart3, TrendingDown, AlertTriangle, Play, Edit, Eye, CheckCircle, Calculator } from "lucide-react";
+import { useState } from "react";
+import { toast } from "@/components/ui/sonner";
 
 const MarginSimulator = () => {
-  const scenarios = [
+  const [scenarios, setScenarios] = useState([
     {
       id: 1,
       name: "EU Interchange Rate Increase",
@@ -38,7 +40,81 @@ const MarginSimulator = () => {
       mitigation: "Opportunity to increase competitive advantage",
       status: "draft"
     }
-  ];
+  ]);
+
+  const [simulationsRun, setSimulationsRun] = useState(142);
+
+  const handleNewSimulation = () => {
+    toast.success("New Simulation", {
+      description: "Opening scenario creation wizard..."
+    });
+    console.log("Creating new simulation scenario");
+  };
+
+  const handleEditScenario = (scenarioId: number) => {
+    const scenario = scenarios.find(s => s.id === scenarioId);
+    toast.info("Edit Scenario", {
+      description: `Opening editor for "${scenario?.name}"`
+    });
+    console.log(`Editing scenario ${scenarioId}:`, scenario);
+  };
+
+  const handleReviewScenario = (scenarioId: number) => {
+    const scenario = scenarios.find(s => s.id === scenarioId);
+    toast.info("Review Scenario", {
+      description: `Reviewing details for "${scenario?.name}"`
+    });
+    console.log(`Reviewing scenario ${scenarioId}:`, scenario);
+  };
+
+  const handleRunScenario = (scenarioId: number) => {
+    const scenario = scenarios.find(s => s.id === scenarioId);
+    
+    // Update simulation count
+    setSimulationsRun(prev => prev + 1);
+    
+    // Update scenario status to simulated if it was draft
+    if (scenario?.status === "draft") {
+      setScenarios(prev => prev.map(s => 
+        s.id === scenarioId ? { ...s, status: "simulated" } : s
+      ));
+    }
+    
+    toast.success("Simulation Complete", {
+      description: `"${scenario?.name}" has been executed successfully`
+    });
+    console.log(`Running simulation for scenario ${scenarioId}:`, scenario);
+  };
+
+  const handleResolveScenario = (scenarioId: number) => {
+    const scenario = scenarios.find(s => s.id === scenarioId);
+    
+    // Update scenario status to resolved
+    setScenarios(prev => prev.map(s => 
+      s.id === scenarioId ? { ...s, status: "resolved" } : s
+    ));
+    
+    toast.success("Scenario Resolved", {
+      description: `"${scenario?.name}" has been marked as resolved`
+    });
+    console.log(`Resolving scenario ${scenarioId}:`, scenario);
+  };
+
+  const handleApplyMitigation = (scenarioId: number) => {
+    const scenario = scenarios.find(s => s.id === scenarioId);
+    toast.success("Mitigation Applied", {
+      description: `Applied mitigation strategy for "${scenario?.name}"`
+    });
+    console.log(`Applying mitigation for scenario ${scenarioId}:`, scenario?.mitigation);
+  };
+
+  const handleCalculateFees = (scenarioId: number) => {
+    const scenario = scenarios.find(s => s.id === scenarioId);
+    toast.info("Fee Calculation", {
+      description: `Calculating detailed fee impact for "${scenario?.name}"`
+    });
+    console.log(`Calculating fees for scenario ${scenarioId}:`, scenario);
+  };
 
   return (
     <Layout>
@@ -55,7 +131,10 @@ const MarginSimulator = () => {
               Model the effects of fee structure changes and market scenarios on profit margins
             </p>
           </div>
-          <Button className="bg-purple-600 hover:bg-purple-700">
+          <Button 
+            onClick={handleNewSimulation}
+            className="bg-purple-600 hover:bg-purple-700"
+          >
             <Play className="w-4 h-4 mr-2" />
             New Simulation
           </Button>
@@ -68,7 +147,7 @@ const MarginSimulator = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-slate-600">Active Scenarios</p>
-                  <p className="text-2xl font-bold text-slate-900">8</p>
+                  <p className="text-2xl font-bold text-slate-900">{scenarios.filter(s => s.status === 'active').length}</p>
                 </div>
                 <BarChart3 className="w-8 h-8 text-purple-500" />
               </div>
@@ -104,7 +183,7 @@ const MarginSimulator = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-medium text-slate-600">Simulations Run</p>
-                  <p className="text-2xl font-bold text-slate-900">142</p>
+                  <p className="text-2xl font-bold text-slate-900">{simulationsRun}</p>
                 </div>
                 <Play className="w-8 h-8 text-blue-500" />
               </div>
@@ -125,7 +204,7 @@ const MarginSimulator = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="font-semibold text-slate-900">{scenario.name}</h3>
-                        <Badge variant={scenario.status === 'active' ? 'default' : scenario.status === 'simulated' ? 'secondary' : 'outline'}>
+                        <Badge variant={scenario.status === 'active' ? 'default' : scenario.status === 'simulated' ? 'secondary' : scenario.status === 'resolved' ? 'default' : 'outline'}>
                           {scenario.status.toUpperCase()}
                         </Badge>
                       </div>
@@ -151,17 +230,66 @@ const MarginSimulator = () => {
                         </div>
                       </div>
                       
-                      <div className="bg-blue-50 p-3 rounded-lg">
+                      <div className="bg-blue-50 p-3 rounded-lg mb-3">
                         <p className="text-sm font-medium text-blue-800 mb-1">Recommended Action:</p>
                         <p className="text-sm text-blue-700">{scenario.mitigation}</p>
                       </div>
-                    </div>
-                    <div className="flex gap-2 ml-4">
-                      <Button variant="outline" size="sm">Edit</Button>
-                      <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
-                        <Play className="w-4 h-4 mr-1" />
-                        Run
-                      </Button>
+
+                      {/* Action Buttons */}
+                      <div className="flex flex-wrap gap-2">
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleEditScenario(scenario.id)}
+                          className="hover:bg-slate-100"
+                        >
+                          <Edit className="w-3 h-3 mr-1" />
+                          Edit
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleReviewScenario(scenario.id)}
+                          className="hover:bg-slate-100"
+                        >
+                          <Eye className="w-3 h-3 mr-1" />
+                          Review
+                        </Button>
+                        <Button 
+                          size="sm" 
+                          onClick={() => handleRunScenario(scenario.id)}
+                          className="bg-purple-600 hover:bg-purple-700"
+                        >
+                          <Play className="w-3 h-3 mr-1" />
+                          Run
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleResolveScenario(scenario.id)}
+                          className="hover:bg-green-50 border-green-200 text-green-700"
+                        >
+                          <CheckCircle className="w-3 h-3 mr-1" />
+                          Resolve
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleApplyMitigation(scenario.id)}
+                          className="hover:bg-blue-50 border-blue-200 text-blue-700"
+                        >
+                          Apply
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => handleCalculateFees(scenario.id)}
+                          className="hover:bg-orange-50 border-orange-200 text-orange-700"
+                        >
+                          <Calculator className="w-3 h-3 mr-1" />
+                          Calculate Fees
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
