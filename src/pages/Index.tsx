@@ -4,9 +4,12 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { AssistantCard } from "@/components/AssistantCard";
 import { MetricCard } from "@/components/MetricCard";
 import { RecentActivity } from "@/components/RecentActivity";
-import { Search, DollarSign, BarChart3, TrendingUp, AlertTriangle, Users, Target, Bot, MessageSquare, Zap } from "lucide-react";
+import { Search, DollarSign, BarChart3, TrendingUp, AlertTriangle, Users, Target, Bot, MessageSquare, Zap, Brain, Sparkles, Activity, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/sonner";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -26,6 +29,18 @@ const Index = () => {
   const handleExportPricingModels = () => {
     toast.success("📊 Export Agent Running", {
       description: "Pricing model export agent is preparing your data..."
+    });
+  };
+
+  const handleAskAllAgents = () => {
+    toast.success("🧠 Multi-Agent Consultation", {
+      description: "Asking all AI agents for cross-functional insights..."
+    });
+  };
+
+  const handleAgentTraining = () => {
+    toast.success("🎓 AI Training Mode", {
+      description: "Training agents with latest market data and user feedback..."
     });
   };
 
@@ -105,11 +120,84 @@ const Index = () => {
     }
   ];
 
+  const aiActivities = [
+    {
+      agent: "Scheme Cost Agent",
+      action: "Detected 3 new anomalies in Mastercard invoice",
+      time: "2 minutes ago",
+      impact: "$4,200",
+      confidence: "96%"
+    },
+    {
+      agent: "Pricing Agent",
+      action: "Optimized rates for 12 high-volume merchants",
+      time: "15 minutes ago",
+      impact: "+$18K/month",
+      confidence: "94%"
+    },
+    {
+      agent: "Margin Agent",
+      action: "Completed quarterly scenario analysis",
+      time: "1 hour ago",
+      impact: "Risk reduced 23%",
+      confidence: "91%"
+    }
+  ];
+
   return (
     <Layout>
       <DashboardHeader />
       
       <div className="p-6 space-y-8">
+        {/* AI System Status */}
+        <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center animate-pulse">
+                  <Brain className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    AI Agent Network Status
+                    <Badge className="bg-green-100 text-green-800 animate-pulse">
+                      ● All Systems Online
+                    </Badge>
+                  </h2>
+                  <p className="text-slate-600">3 AI agents actively monitoring and optimizing your financial operations</p>
+                  <div className="flex items-center gap-4 mt-2 text-sm text-slate-500">
+                    <span className="flex items-center gap-1">
+                      <Activity className="w-3 h-3" />
+                      Processing 247 tasks/hour
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Shield className="w-3 h-3" />
+                      99.9% uptime
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Button 
+                  variant="outline"
+                  onClick={handleAskAllAgents}
+                  className="border-purple-300 hover:bg-purple-50"
+                >
+                  <MessageSquare className="w-4 h-4 mr-2" />
+                  Ask All Agents
+                </Button>
+                <Button 
+                  className="bg-purple-600 hover:bg-purple-700"
+                  onClick={handleAgentTraining}
+                >
+                  <Brain className="w-4 h-4 mr-2" />
+                  Train Agents
+                </Button>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Agent Performance Overview */}
         <section>
           <div className="mb-6">
@@ -125,6 +213,40 @@ const Index = () => {
             ))}
           </div>
         </section>
+
+        {/* Recent AI Activities */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Zap className="w-5 h-5 text-yellow-600" />
+              Recent AI Agent Activities
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {aiActivities.map((activity, index) => (
+                <div key={index} className="flex items-center justify-between p-4 bg-slate-50 rounded-lg hover:bg-slate-100 transition-colors">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                      <Bot className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-slate-900">{activity.agent}</p>
+                      <p className="text-sm text-slate-600">{activity.action}</p>
+                      <p className="text-xs text-slate-400">{activity.time}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-semibold text-green-600">{activity.impact}</p>
+                    <Badge className="bg-purple-100 text-purple-700 text-xs">
+                      {activity.confidence} confidence
+                    </Badge>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
 
         {/* AI Financial Agents */}
         <section>
