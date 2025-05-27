@@ -1,12 +1,14 @@
-
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { AssistantCard } from "@/components/AssistantCard";
 import { MetricCard } from "@/components/MetricCard";
 import { RecentActivity } from "@/components/RecentActivity";
 import { Search, DollarSign, BarChart3, TrendingUp, AlertTriangle, Users, Target } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   const assistants = [
     {
       title: "🔍 Scheme Cost Assistant",
@@ -20,7 +22,7 @@ const Index = () => {
       ],
       status: "active" as const,
       gradient: "bg-gradient-to-br from-blue-600 to-blue-700",
-      onClick: () => console.log("Launching Scheme Cost Assistant...")
+      onClick: () => navigate("/scheme-cost")
     },
     {
       title: "💰 Client Pricing Assistant",
@@ -34,7 +36,7 @@ const Index = () => {
       ],
       status: "active" as const,
       gradient: "bg-gradient-to-br from-green-600 to-green-700",
-      onClick: () => console.log("Launching Client Pricing Assistant...")
+      onClick: () => navigate("/client-pricing")
     },
     {
       title: "📊 Margin Impact Simulator",
@@ -48,7 +50,7 @@ const Index = () => {
       ],
       status: "beta" as const,
       gradient: "bg-gradient-to-br from-purple-600 to-purple-700",
-      onClick: () => console.log("Launching Margin Impact Simulator...")
+      onClick: () => navigate("/margin-simulator")
     }
   ];
 

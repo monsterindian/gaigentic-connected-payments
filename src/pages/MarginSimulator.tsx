@@ -1,0 +1,177 @@
+
+import { Layout } from "@/components/Layout";
+import { DashboardHeader } from "@/components/DashboardHeader";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { BarChart3, TrendingDown, AlertTriangle, Play } from "lucide-react";
+
+const MarginSimulator = () => {
+  const scenarios = [
+    {
+      id: 1,
+      name: "EU Interchange Rate Increase",
+      description: "+0.1% increase in interchange fees for EU transactions",
+      impact: "-0.7%",
+      affectedMerchants: 89,
+      estimatedLoss: "$1.2M",
+      mitigation: "Adjust markup from 0.4% to 0.5% to recover loss",
+      status: "active"
+    },
+    {
+      id: 2,
+      name: "High-Risk Segment Volume Drop",
+      description: "20% volume decrease in high-risk merchant segment",
+      impact: "-0.3%",
+      affectedMerchants: 23,
+      estimatedLoss: "$450K",
+      mitigation: "Focus retention efforts on top 10 high-value accounts",
+      status: "simulated"
+    },
+    {
+      id: 3,
+      name: "Cross-Border Fee Adjustment",
+      description: "New regulatory requirements for cross-border transactions",
+      impact: "+0.2%",
+      affectedMerchants: 156,
+      estimatedGain: "$780K",
+      mitigation: "Opportunity to increase competitive advantage",
+      status: "draft"
+    }
+  ];
+
+  return (
+    <Layout>
+      <DashboardHeader />
+      
+      <div className="p-6 space-y-8">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-slate-900 flex items-center gap-3">
+              <BarChart3 className="w-8 h-8 text-purple-600" />
+              Margin Impact Simulator
+            </h1>
+            <p className="text-slate-600 mt-2">
+              Model the effects of fee structure changes and market scenarios on profit margins
+            </p>
+          </div>
+          <Button className="bg-purple-600 hover:bg-purple-700">
+            <Play className="w-4 h-4 mr-2" />
+            New Simulation
+          </Button>
+        </div>
+
+        {/* Quick Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-slate-600">Active Scenarios</p>
+                  <p className="text-2xl font-bold text-slate-900">8</p>
+                </div>
+                <BarChart3 className="w-8 h-8 text-purple-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-slate-600">Risk Exposure</p>
+                  <p className="text-2xl font-bold text-slate-900">$3.4M</p>
+                </div>
+                <AlertTriangle className="w-8 h-8 text-red-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-slate-600">Potential Upside</p>
+                  <p className="text-2xl font-bold text-slate-900">$2.1M</p>
+                </div>
+                <TrendingDown className="w-8 h-8 text-green-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm font-medium text-slate-600">Simulations Run</p>
+                  <p className="text-2xl font-bold text-slate-900">142</p>
+                </div>
+                <Play className="w-8 h-8 text-blue-500" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Scenarios List */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Impact Scenarios</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {scenarios.map((scenario) => (
+                <div key={scenario.id} className="border rounded-lg p-4 hover:bg-slate-50 transition-colors">
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="font-semibold text-slate-900">{scenario.name}</h3>
+                        <Badge variant={scenario.status === 'active' ? 'default' : scenario.status === 'simulated' ? 'secondary' : 'outline'}>
+                          {scenario.status.toUpperCase()}
+                        </Badge>
+                      </div>
+                      
+                      <p className="text-slate-600 text-sm mb-3">{scenario.description}</p>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
+                        <div>
+                          <p className="text-sm text-slate-600">Margin Impact</p>
+                          <p className={`text-lg font-semibold ${scenario.impact.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                            {scenario.impact}
+                          </p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-slate-600">Affected Merchants</p>
+                          <p className="text-lg font-semibold text-slate-900">{scenario.affectedMerchants}</p>
+                        </div>
+                        <div>
+                          <p className="text-sm text-slate-600">Financial Impact</p>
+                          <p className={`text-lg font-semibold ${scenario.estimatedGain ? 'text-green-600' : 'text-red-600'}`}>
+                            {scenario.estimatedLoss || scenario.estimatedGain}
+                          </p>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-blue-50 p-3 rounded-lg">
+                        <p className="text-sm font-medium text-blue-800 mb-1">Recommended Action:</p>
+                        <p className="text-sm text-blue-700">{scenario.mitigation}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2 ml-4">
+                      <Button variant="outline" size="sm">Edit</Button>
+                      <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                        <Play className="w-4 h-4 mr-1" />
+                        Run
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </Layout>
+  );
+};
+
+export default MarginSimulator;
