@@ -13,6 +13,8 @@ import Settings from "./pages/Settings";
 import ScenarioEditor from "./pages/ScenarioEditor";
 import ScenarioReview from "./pages/ScenarioReview";
 import FeeCalculatorDetailed from "./pages/FeeCalculatorDetailed";
+import AnomalyReview from "./pages/AnomalyReview";
+import AnomalyResolution from "./pages/AnomalyResolution";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -32,6 +34,8 @@ const App = () => (
           <Route path="/scenario-editor" element={<ScenarioEditor />} />
           <Route path="/scenario-review" element={<ScenarioReview />} />
           <Route path="/fee-calculator-detailed" element={<FeeCalculatorDetailed />} />
+          <Route path="/anomaly-review" element={<AnomalyReview />} />
+          <Route path="/anomaly-resolution" element={<AnomalyResolution />} />
           <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

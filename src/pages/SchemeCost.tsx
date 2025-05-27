@@ -1,4 +1,3 @@
-
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -6,8 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, AlertTriangle, DollarSign, FileText } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
+import { useNavigate } from "react-router-dom";
 
 const SchemeCost = () => {
+  const navigate = useNavigate();
+
   const anomalies = [
     {
       id: 1,
@@ -36,15 +38,11 @@ const SchemeCost = () => {
   ];
 
   const handleReview = (anomaly: any) => {
-    toast.success("Review Started", {
-      description: `Reviewing ${anomaly.feeType} - ${anomaly.amount}`
-    });
+    navigate(`/anomaly-review?id=${anomaly.id}`);
   };
 
   const handleResolve = (anomaly: any) => {
-    toast.success("Anomaly Resolved", {
-      description: `${anomaly.feeType} has been marked as resolved`
-    });
+    navigate(`/anomaly-resolution?id=${anomaly.id}`);
   };
 
   return (
