@@ -6,9 +6,28 @@ import { MetricCard } from "@/components/MetricCard";
 import { RecentActivity } from "@/components/RecentActivity";
 import { Search, DollarSign, BarChart3, TrendingUp, AlertTriangle, Users, Target } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "@/components/ui/sonner";
 
 const Index = () => {
   const navigate = useNavigate();
+
+  const handleGenerateReport = () => {
+    toast.success("Generating Report", {
+      description: "Monthly financial report is being generated..."
+    });
+  };
+
+  const handleRunAnomalyDetection = () => {
+    toast.success("Running Detection", {
+      description: "Anomaly detection algorithm is now scanning transactions..."
+    });
+  };
+
+  const handleExportPricingModels = () => {
+    toast.success("Exporting Models", {
+      description: "Pricing models are being exported to CSV format..."
+    });
+  };
 
   const assistants = [
     {
@@ -132,13 +151,22 @@ const Index = () => {
                 <h3 className="text-lg font-semibold mb-2">Quick Actions</h3>
                 <p className="text-slate-200 mb-4 text-sm">Access frequently used tools and reports</p>
                 <div className="space-y-2">
-                  <button className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors">
+                  <button 
+                    className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors"
+                    onClick={handleGenerateReport}
+                  >
                     → Generate Monthly Report
                   </button>
-                  <button className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors">
+                  <button 
+                    className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors"
+                    onClick={handleRunAnomalyDetection}
+                  >
                     → Run Anomaly Detection
                   </button>
-                  <button className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors">
+                  <button 
+                    className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors"
+                    onClick={handleExportPricingModels}
+                  >
                     → Export Pricing Models
                   </button>
                 </div>

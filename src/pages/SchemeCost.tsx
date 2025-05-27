@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, AlertTriangle, DollarSign, FileText } from "lucide-react";
+import { toast } from "@/components/ui/sonner";
 
 const SchemeCost = () => {
   const anomalies = [
@@ -34,6 +35,18 @@ const SchemeCost = () => {
     }
   ];
 
+  const handleReview = (anomaly: any) => {
+    toast.success("Review Started", {
+      description: `Reviewing ${anomaly.feeType} - ${anomaly.amount}`
+    });
+  };
+
+  const handleResolve = (anomaly: any) => {
+    toast.success("Anomaly Resolved", {
+      description: `${anomaly.feeType} has been marked as resolved`
+    });
+  };
+
   return (
     <Layout>
       <DashboardHeader />
@@ -49,7 +62,10 @@ const SchemeCost = () => {
               Reconcile card scheme invoices against internal pricing models and identify discrepancies
             </p>
           </div>
-          <Button className="bg-slate-700 hover:bg-slate-800">
+          <Button 
+            className="bg-slate-700 hover:bg-slate-800"
+            onClick={() => toast.success("Upload Ready", { description: "Invoice upload functionality activated" })}
+          >
             <FileText className="w-4 h-4 mr-2" />
             Upload Invoice
           </Button>
@@ -130,8 +146,21 @@ const SchemeCost = () => {
                       <p className="text-lg font-semibold text-red-600">{anomaly.amount}</p>
                     </div>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm" className="border-slate-300 hover:bg-slate-100">Review</Button>
-                      <Button size="sm" className="bg-slate-700 hover:bg-slate-800">Resolve</Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="border-slate-300 hover:bg-slate-100"
+                        onClick={() => handleReview(anomaly)}
+                      >
+                        Review
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="bg-slate-700 hover:bg-slate-800"
+                        onClick={() => handleResolve(anomaly)}
+                      >
+                        Resolve
+                      </Button>
                     </div>
                   </div>
                 </div>

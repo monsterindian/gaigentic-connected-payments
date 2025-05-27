@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { DollarSign, Users, TrendingUp, Target } from "lucide-react";
+import { toast } from "@/components/ui/sonner";
 
 const ClientPricing = () => {
   const pricingRecommendations = [
@@ -47,6 +48,24 @@ const ClientPricing = () => {
     }
   ];
 
+  const handleReview = (recommendation: any) => {
+    toast.success("Review Started", {
+      description: `Reviewing pricing for ${recommendation.merchant}`
+    });
+  };
+
+  const handleApply = (recommendation: any) => {
+    toast.success("Pricing Applied", {
+      description: `New pricing structure applied for ${recommendation.merchant}`
+    });
+  };
+
+  const handleRunAnalysis = () => {
+    toast.success("Analysis Started", {
+      description: "Running comprehensive pricing analysis across all merchants"
+    });
+  };
+
   return (
     <Layout>
       <DashboardHeader />
@@ -62,7 +81,10 @@ const ClientPricing = () => {
               Optimize merchant pricing with AI-driven recommendations based on risk profiles and market benchmarks
             </p>
           </div>
-          <Button className="bg-green-600 hover:bg-green-700">
+          <Button 
+            className="bg-green-600 hover:bg-green-700"
+            onClick={handleRunAnalysis}
+          >
             <Target className="w-4 h-4 mr-2" />
             Run Analysis
           </Button>
@@ -164,8 +186,20 @@ const ClientPricing = () => {
                       <p className="text-sm text-slate-600 italic">{rec.rationale}</p>
                     </div>
                     <div className="flex gap-2 ml-4">
-                      <Button variant="outline" size="sm">Review</Button>
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700">Apply</Button>
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => handleReview(rec)}
+                      >
+                        Review
+                      </Button>
+                      <Button 
+                        size="sm" 
+                        className="bg-green-600 hover:bg-green-700"
+                        onClick={() => handleApply(rec)}
+                      >
+                        Apply
+                      </Button>
                     </div>
                   </div>
                 </div>
