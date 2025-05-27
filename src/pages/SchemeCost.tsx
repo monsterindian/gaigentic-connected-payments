@@ -1,9 +1,10 @@
+
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Search, AlertTriangle, DollarSign, FileText } from "lucide-react";
+import { Search, AlertTriangle, DollarSign, FileText, Bot, MessageSquare, Brain } from "lucide-react";
 import { toast } from "@/components/ui/sonner";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +18,8 @@ const SchemeCost = () => {
       amount: "$2,847.50",
       description: "Unrecognized penalty line - verify against latest Mastercard bulletin",
       severity: "high",
-      impact: "Medium"
+      impact: "Medium",
+      aiConfidence: "94%"
     },
     {
       id: 2,
@@ -25,7 +27,8 @@ const SchemeCost = () => {
       amount: "$1,203.25",
       description: "Rate mismatch: invoiced 0.14% vs model 0.12%",
       severity: "medium",
-      impact: "Low"
+      impact: "Low",
+      aiConfidence: "87%"
     },
     {
       id: 3,
@@ -33,7 +36,8 @@ const SchemeCost = () => {
       amount: "$856.00",
       description: "New fee code not in pricing model - requires review",
       severity: "high",
-      impact: "High"
+      impact: "High",
+      aiConfidence: "96%"
     }
   ];
 
@@ -53,21 +57,47 @@ const SchemeCost = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-slate-900 flex items-center gap-3">
-              <Search className="w-8 h-8 text-slate-700" />
-              Scheme Cost Assistant
+              <div className="w-10 h-10 bg-gradient-to-br from-slate-600 to-slate-800 rounded-xl flex items-center justify-center">
+                <Search className="w-6 h-6 text-white" />
+              </div>
+              Scheme Cost AI Agent
+              <Badge variant="secondary" className="bg-blue-100 text-blue-700">
+                <Bot className="w-3 h-3 mr-1" />
+                AI Powered
+              </Badge>
             </h1>
             <p className="text-slate-600 mt-2">
-              Reconcile card scheme invoices against internal pricing models and identify discrepancies
+              Your AI assistant for reconciling card scheme invoices and identifying cost discrepancies
             </p>
           </div>
           <Button 
             className="bg-slate-700 hover:bg-slate-800"
-            onClick={() => toast.success("Upload Ready", { description: "Invoice upload functionality activated" })}
+            onClick={() => toast.success("🤖 AI Agent Ready", { description: "Upload your invoice and I'll analyze it for you" })}
           >
             <FileText className="w-4 h-4 mr-2" />
-            Upload Invoice
+            Upload Invoice for AI Analysis
           </Button>
         </div>
+
+        {/* AI Agent Status */}
+        <Card className="bg-gradient-to-r from-blue-50 to-purple-50 border-blue-200">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center animate-pulse">
+                  <Brain className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-slate-900">AI Agent Status: Actively Monitoring</h3>
+                  <p className="text-sm text-slate-600">Continuously analyzing invoices and detecting anomalies</p>
+                </div>
+              </div>
+              <Badge className="bg-green-100 text-green-800">
+                ● Online
+              </Badge>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -75,7 +105,7 @@ const SchemeCost = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-slate-600">Total Anomalies</p>
+                  <p className="text-sm font-medium text-slate-600">AI Detected Anomalies</p>
                   <p className="text-2xl font-bold text-slate-900">23</p>
                 </div>
                 <AlertTriangle className="w-8 h-8 text-red-500" />
@@ -99,7 +129,7 @@ const SchemeCost = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-slate-600">Invoices Processed</p>
+                  <p className="text-sm font-medium text-slate-600">AI Processed Invoices</p>
                   <p className="text-2xl font-bold text-slate-900">847</p>
                 </div>
                 <FileText className="w-8 h-8 text-blue-500" />
@@ -111,19 +141,22 @@ const SchemeCost = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-slate-600">Accuracy Rate</p>
+                  <p className="text-sm font-medium text-slate-600">AI Accuracy Rate</p>
                   <p className="text-2xl font-bold text-slate-900">97.8%</p>
                 </div>
-                <Search className="w-8 h-8 text-purple-500" />
+                <Bot className="w-8 h-8 text-purple-500" />
               </div>
             </CardContent>
           </Card>
         </div>
 
-        {/* Anomalies List */}
+        {/* AI Detected Anomalies */}
         <Card className="shadow-lg border-slate-200">
           <CardHeader className="bg-slate-50 border-b border-slate-200">
-            <CardTitle className="text-slate-800">Recent Anomalies Detected</CardTitle>
+            <CardTitle className="text-slate-800 flex items-center gap-2">
+              <Brain className="w-5 h-5 text-purple-600" />
+              AI Detected Anomalies
+            </CardTitle>
           </CardHeader>
           <CardContent className="p-6">
             <div className="space-y-4">
@@ -139,6 +172,10 @@ const SchemeCost = () => {
                         <Badge variant="outline" className="border-slate-300">
                           {anomaly.impact} Impact
                         </Badge>
+                        <Badge className="bg-purple-100 text-purple-700">
+                          <Bot className="w-3 h-3 mr-1" />
+                          AI Confidence: {anomaly.aiConfidence}
+                        </Badge>
                       </div>
                       <p className="text-slate-600 text-sm mb-2">{anomaly.description}</p>
                       <p className="text-lg font-semibold text-red-600">{anomaly.amount}</p>
@@ -150,14 +187,16 @@ const SchemeCost = () => {
                         className="border-slate-300 hover:bg-slate-100"
                         onClick={() => handleReview(anomaly)}
                       >
-                        Review
+                        <MessageSquare className="w-3 h-3 mr-1" />
+                        Ask Agent to Review
                       </Button>
                       <Button 
                         size="sm" 
                         className="bg-slate-700 hover:bg-slate-800"
                         onClick={() => handleResolve(anomaly)}
                       >
-                        Resolve
+                        <Bot className="w-3 h-3 mr-1" />
+                        Let Agent Resolve
                       </Button>
                     </div>
                   </div>
