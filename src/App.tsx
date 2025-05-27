@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import SchemeCost from "./pages/SchemeCost";
 import ClientPricing from "./pages/ClientPricing";
 import MarginSimulator from "./pages/MarginSimulator";
+import FeeCalculator from "./pages/FeeCalculator";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -23,6 +25,8 @@ const App = () => (
           <Route path="/scheme-cost" element={<SchemeCost />} />
           <Route path="/client-pricing" element={<ClientPricing />} />
           <Route path="/margin-simulator" element={<MarginSimulator />} />
+          <Route path="/calculator" element={<FeeCalculator />} />
+          <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
