@@ -1,3 +1,4 @@
+
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { AssistantCard } from "@/components/AssistantCard";
@@ -21,7 +22,7 @@ const Index = () => {
         "Real-time alerts for discrepancies"
       ],
       status: "active" as const,
-      gradient: "bg-gradient-to-br from-blue-600 to-blue-700",
+      gradient: "bg-gradient-to-br from-slate-600 to-slate-800",
       onClick: () => navigate("/scheme-cost")
     },
     {
@@ -35,7 +36,7 @@ const Index = () => {
         "Margin target achievement"
       ],
       status: "active" as const,
-      gradient: "bg-gradient-to-br from-green-600 to-green-700",
+      gradient: "bg-gradient-to-br from-slate-700 to-slate-900",
       onClick: () => navigate("/client-pricing")
     },
     {
@@ -49,7 +50,7 @@ const Index = () => {
         "Actionable mitigation strategies"
       ],
       status: "beta" as const,
-      gradient: "bg-gradient-to-br from-purple-600 to-purple-700",
+      gradient: "bg-gradient-to-br from-slate-600 to-slate-700",
       onClick: () => navigate("/margin-simulator")
     }
   ];
@@ -127,17 +128,17 @@ const Index = () => {
               <RecentActivity />
             </div>
             <div className="space-y-6">
-              <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-xl p-6 text-white">
+              <div className="bg-gradient-to-br from-slate-700 to-slate-900 rounded-xl p-6 text-white shadow-lg">
                 <h3 className="text-lg font-semibold mb-2">Quick Actions</h3>
-                <p className="text-blue-100 mb-4 text-sm">Access frequently used tools and reports</p>
+                <p className="text-slate-200 mb-4 text-sm">Access frequently used tools and reports</p>
                 <div className="space-y-2">
-                  <button className="w-full text-left text-sm hover:bg-blue-600 p-2 rounded transition-colors">
+                  <button className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors">
                     → Generate Monthly Report
                   </button>
-                  <button className="w-full text-left text-sm hover:bg-blue-600 p-2 rounded transition-colors">
+                  <button className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors">
                     → Run Anomaly Detection
                   </button>
-                  <button className="w-full text-left text-sm hover:bg-blue-600 p-2 rounded transition-colors">
+                  <button className="w-full text-left text-sm hover:bg-slate-600 p-2 rounded transition-colors">
                     → Export Pricing Models
                   </button>
                 </div>

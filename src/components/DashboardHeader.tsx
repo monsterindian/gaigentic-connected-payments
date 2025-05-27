@@ -10,17 +10,17 @@ export function DashboardHeader() {
         <div className="flex items-center gap-4">
           <SidebarTrigger className="hover:bg-slate-100" />
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">Financial Intelligence Dashboard</h1>
+            <h1 className="text-2xl font-bold text-slate-900">gaigentic Financial Intelligence</h1>
             <p className="text-slate-600">Real-time insights for pricing optimization and cost reconciliation</p>
           </div>
         </div>
         
         <div className="flex items-center gap-3">
-          <Button variant="ghost" size="icon" className="relative">
+          <Button variant="ghost" size="icon" className="relative hover:bg-slate-100">
             <Bell className="w-5 h-5" />
             <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" className="hover:bg-slate-100">
             <User className="w-5 h-5" />
           </Button>
         </div>

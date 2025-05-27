@@ -42,14 +42,14 @@ const SchemeCost = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-slate-900 flex items-center gap-3">
-              <Search className="w-8 h-8 text-blue-600" />
+              <Search className="w-8 h-8 text-slate-700" />
               Scheme Cost Assistant
             </h1>
             <p className="text-slate-600 mt-2">
               Reconcile card scheme invoices against internal pricing models and identify discrepancies
             </p>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700">
+          <Button className="bg-slate-700 hover:bg-slate-800">
             <FileText className="w-4 h-4 mr-2" />
             Upload Invoice
           </Button>
@@ -57,7 +57,7 @@ const SchemeCost = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card>
+          <Card className="shadow-lg border-slate-200">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -107,14 +107,14 @@ const SchemeCost = () => {
         </div>
 
         {/* Anomalies List */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Anomalies Detected</CardTitle>
+        <Card className="shadow-lg border-slate-200">
+          <CardHeader className="bg-slate-50 border-b border-slate-200">
+            <CardTitle className="text-slate-800">Recent Anomalies Detected</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6">
             <div className="space-y-4">
               {anomalies.map((anomaly) => (
-                <div key={anomaly.id} className="border rounded-lg p-4 hover:bg-slate-50 transition-colors">
+                <div key={anomaly.id} className="border border-slate-200 rounded-lg p-4 hover:bg-slate-50 transition-colors">
                   <div className="flex items-center justify-between">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
@@ -122,7 +122,7 @@ const SchemeCost = () => {
                         <Badge variant={anomaly.severity === 'high' ? 'destructive' : 'secondary'}>
                           {anomaly.severity.toUpperCase()}
                         </Badge>
-                        <Badge variant="outline">
+                        <Badge variant="outline" className="border-slate-300">
                           {anomaly.impact} Impact
                         </Badge>
                       </div>
@@ -130,8 +130,8 @@ const SchemeCost = () => {
                       <p className="text-lg font-semibold text-red-600">{anomaly.amount}</p>
                     </div>
                     <div className="flex gap-2">
-                      <Button variant="outline" size="sm">Review</Button>
-                      <Button size="sm">Resolve</Button>
+                      <Button variant="outline" size="sm" className="border-slate-300 hover:bg-slate-100">Review</Button>
+                      <Button size="sm" className="bg-slate-700 hover:bg-slate-800">Resolve</Button>
                     </div>
                   </div>
                 </div>

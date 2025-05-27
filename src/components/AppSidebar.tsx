@@ -54,11 +54,11 @@ export function AppSidebar() {
     <Sidebar className="border-r border-slate-200">
       <SidebarHeader className="p-4 border-b border-slate-200">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg flex items-center justify-center">
             <DollarSign className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-slate-900">FinIntel AI</h2>
+            <h2 className="text-lg font-bold text-slate-900">gaigentic</h2>
             <p className="text-xs text-slate-500">Financial Intelligence Platform</p>
           </div>
         </div>
@@ -70,7 +70,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {navigationItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="hover:bg-blue-50 hover:text-blue-700">
+                  <SidebarMenuButton asChild className="hover:bg-slate-100 hover:text-slate-800">
                     <a href={item.url} className="flex items-center gap-3">
                       <item.icon className="w-4 h-4" />
                       <span className="font-medium">{item.title}</span>
@@ -88,7 +88,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {toolsItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild className="hover:bg-blue-50 hover:text-blue-700">
+                  <SidebarMenuButton asChild className="hover:bg-slate-100 hover:text-slate-800">
                     <a href={item.url} className="flex items-center gap-3">
                       <item.icon className="w-4 h-4" />
                       <span className="font-medium">{item.title}</span>

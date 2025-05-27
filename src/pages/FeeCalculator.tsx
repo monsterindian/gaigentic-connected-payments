@@ -49,7 +49,7 @@ const FeeCalculator = () => {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-3xl font-bold text-slate-900 flex items-center gap-3">
-              <Calculator className="w-8 h-8 text-blue-600" />
+              <Calculator className="w-8 h-8 text-slate-700" />
               Fee Calculator
             </h1>
             <p className="text-slate-600 mt-2">
@@ -60,26 +60,27 @@ const FeeCalculator = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Input Form */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Transaction Details</CardTitle>
+          <Card className="shadow-lg border-slate-200">
+            <CardHeader className="bg-slate-50 border-b border-slate-200">
+              <CardTitle className="text-slate-800">Transaction Details</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 p-6">
               <div>
-                <Label htmlFor="amount">Transaction Amount</Label>
+                <Label htmlFor="amount" className="text-slate-700">Transaction Amount</Label>
                 <Input
                   id="amount"
                   type="number"
                   placeholder="Enter amount"
                   value={transactionAmount}
                   onChange={(e) => setTransactionAmount(e.target.value)}
+                  className="border-slate-300 focus:border-slate-500"
                 />
               </div>
 
               <div>
-                <Label htmlFor="cardType">Card Type</Label>
+                <Label htmlFor="cardType" className="text-slate-700">Card Type</Label>
                 <Select value={cardType} onValueChange={setCardType}>
-                  <SelectTrigger>
+                  <SelectTrigger className="border-slate-300 focus:border-slate-500">
                     <SelectValue placeholder="Select card type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -92,9 +93,9 @@ const FeeCalculator = () => {
               </div>
 
               <div>
-                <Label htmlFor="region">Region</Label>
+                <Label htmlFor="region" className="text-slate-700">Region</Label>
                 <Select value={region} onValueChange={setRegion}>
-                  <SelectTrigger>
+                  <SelectTrigger className="border-slate-300 focus:border-slate-500">
                     <SelectValue placeholder="Select region" />
                   </SelectTrigger>
                   <SelectContent>
@@ -106,9 +107,9 @@ const FeeCalculator = () => {
               </div>
 
               <div>
-                <Label htmlFor="merchantType">Merchant Type</Label>
+                <Label htmlFor="merchantType" className="text-slate-700">Merchant Type</Label>
                 <Select value={merchantType} onValueChange={setMerchantType}>
-                  <SelectTrigger>
+                  <SelectTrigger className="border-slate-300 focus:border-slate-500">
                     <SelectValue placeholder="Select merchant type" />
                   </SelectTrigger>
                   <SelectContent>
@@ -121,7 +122,7 @@ const FeeCalculator = () => {
                 </Select>
               </div>
 
-              <Button onClick={calculateFees} className="w-full">
+              <Button onClick={calculateFees} className="w-full bg-slate-700 hover:bg-slate-800">
                 <DollarSign className="w-4 h-4 mr-2" />
                 Calculate Fees
               </Button>
@@ -129,17 +130,17 @@ const FeeCalculator = () => {
           </Card>
 
           {/* Results */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Fee Breakdown</CardTitle>
+          <Card className="shadow-lg border-slate-200">
+            <CardHeader className="bg-slate-50 border-b border-slate-200">
+              <CardTitle className="text-slate-800">Fee Breakdown</CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-6">
               {calculatedFees ? (
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-slate-600">Transaction Amount</p>
-                      <p className="text-lg font-semibold">${calculatedFees.transactionAmount.toFixed(2)}</p>
+                      <p className="text-lg font-semibold text-slate-900">${calculatedFees.transactionAmount.toFixed(2)}</p>
                     </div>
                     <div>
                       <p className="text-sm text-slate-600">Total Fee %</p>
@@ -147,34 +148,34 @@ const FeeCalculator = () => {
                     </div>
                   </div>
 
-                  <div className="border-t pt-4 space-y-3">
+                  <div className="border-t border-slate-200 pt-4 space-y-3">
                     <div className="flex justify-between">
                       <span className="text-slate-600">Interchange Fee</span>
-                      <span className="font-medium">${calculatedFees.interchangeFee.toFixed(2)}</span>
+                      <span className="font-medium text-slate-800">${calculatedFees.interchangeFee.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600">Scheme Fee</span>
-                      <span className="font-medium">${calculatedFees.schemeFee.toFixed(2)}</span>
+                      <span className="font-medium text-slate-800">${calculatedFees.schemeFee.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600">Processing Fee</span>
-                      <span className="font-medium">${calculatedFees.processingFee.toFixed(2)}</span>
+                      <span className="font-medium text-slate-800">${calculatedFees.processingFee.toFixed(2)}</span>
                     </div>
                     {calculatedFees.crossBorderFee > 0 && (
                       <div className="flex justify-between">
                         <span className="text-slate-600">Cross-Border Fee</span>
-                        <span className="font-medium">${calculatedFees.crossBorderFee.toFixed(2)}</span>
+                        <span className="font-medium text-slate-800">${calculatedFees.crossBorderFee.toFixed(2)}</span>
                       </div>
                     )}
                   </div>
 
-                  <div className="border-t pt-4">
+                  <div className="border-t border-slate-200 pt-4">
                     <div className="flex justify-between text-lg font-semibold">
-                      <span>Total Fees</span>
+                      <span className="text-slate-800">Total Fees</span>
                       <span className="text-red-600">${calculatedFees.totalFees.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-lg font-semibold mt-2">
-                      <span>Net Amount</span>
+                      <span className="text-slate-800">Net Amount</span>
                       <span className="text-green-600">${calculatedFees.netAmount.toFixed(2)}</span>
                     </div>
                   </div>
