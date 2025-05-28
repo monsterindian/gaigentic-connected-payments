@@ -3,7 +3,7 @@ import { DashboardHeader } from "@/components/DashboardHeader";
 import { AssistantCard } from "@/components/AssistantCard";
 import { MetricCard } from "@/components/MetricCard";
 import { RecentActivity } from "@/components/RecentActivity";
-import { Search, DollarSign, BarChart3, TrendingUp, AlertTriangle, Users, Target, Bot, MessageSquare, Zap, Brain, Sparkles, Activity, Shield } from "lucide-react";
+import { Search, DollarSign, TrendingUp, AlertTriangle, Users, Target, Bot, MessageSquare, Zap, Brain, Sparkles, Activity, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -61,20 +61,6 @@ const Index = () => {
       status: "active" as const,
       gradient: "bg-gradient-to-br from-slate-700 to-slate-900",
       onClick: () => navigate("/client-pricing")
-    },
-    {
-      title: "📊 Margin Analysis Agent",
-      description: "I model the effects of fee structure changes and market scenarios on profit margins using advanced AI simulation capabilities.",
-      icon: BarChart3,
-      features: [
-        "AI-powered scenario modeling",
-        "Before/after impact analysis",
-        "Risk area identification with ML",
-        "Actionable mitigation strategies"
-      ],
-      status: "beta" as const,
-      gradient: "bg-gradient-to-br from-slate-600 to-slate-700",
-      onClick: () => navigate("/margin-simulator")
     }
   ];
 
@@ -153,7 +139,7 @@ const Index = () => {
                       ● All Systems Online
                     </Badge>
                   </h2>
-                  <p className="text-slate-600">3 AI agents actively monitoring and optimizing your financial operations</p>
+                  <p className="text-slate-600">2 AI agents actively monitoring and optimizing your financial operations</p>
                   <div className="flex items-center gap-4 mt-2 text-sm text-slate-500">
                     <span className="flex items-center gap-1">
                       <Activity className="w-3 h-3" />
@@ -246,7 +232,7 @@ const Index = () => {
             </h2>
             <p className="text-slate-600">Specialized AI assistants ready to help with financial intelligence and optimization</p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {assistants.map((assistant, index) => (
               <AssistantCard key={index} {...assistant} />
             ))}

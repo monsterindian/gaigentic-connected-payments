@@ -1,5 +1,5 @@
 
-import { Home, Search, DollarSign, BarChart3, Settings, Calculator, Bot } from "lucide-react";
+import { Home, Search, DollarSign, Settings, Calculator, Bot } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -27,11 +27,6 @@ const navigationItems = [
     title: "Pricing Optimization Agent",
     url: "/client-pricing",
     icon: DollarSign,
-  },
-  {
-    title: "Margin Analysis Agent",
-    url: "/margin-simulator",
-    icon: BarChart3,
   },
 ];
 

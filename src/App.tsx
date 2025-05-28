@@ -7,7 +7,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import SchemeCost from "./pages/SchemeCost";
 import ClientPricing from "./pages/ClientPricing";
-import MarginSimulator from "./pages/MarginSimulator";
 import FeeCalculator from "./pages/FeeCalculator";
 import Settings from "./pages/Settings";
 import ScenarioEditor from "./pages/ScenarioEditor";
@@ -34,7 +33,6 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/scheme-cost" element={<SchemeCost />} />
           <Route path="/client-pricing" element={<ClientPricing />} />
-          <Route path="/margin-simulator" element={<MarginSimulator />} />
           <Route path="/calculator" element={<FeeCalculator />} />
           <Route path="/scenario-editor" element={<ScenarioEditor />} />
           <Route path="/scenario-review" element={<ScenarioReview />} />
