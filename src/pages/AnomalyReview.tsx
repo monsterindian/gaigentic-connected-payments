@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowLeft, Eye, CheckCircle, XCircle, AlertTriangle, DollarSign } from "lucide-react";
+import { ArrowLeft, Eye, CheckCircle, XCircle, AlertTriangle, DollarSign, FileText } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "@/components/ui/sonner";
@@ -32,7 +32,30 @@ const AnomalyReview = () => {
         schemeProvider: "Mastercard",
         transactionVolume: "45,230",
         expectedAmount: "$2,120.00",
-        variance: "$727.50"
+        variance: "$727.50",
+        relatedFeeLines: [
+          {
+            lineCode: "CBP-001",
+            description: "Cross-Border Processing Fee",
+            agreementRate: "0.47%",
+            invoicedRate: "0.47%",
+            status: "matched"
+          },
+          {
+            lineCode: "CBP-ADJ-NEW",
+            description: "Cross-Border Adjustment Penalty (New)",
+            agreementRate: "Not defined",
+            invoicedRate: "0.16%",
+            status: "unrecognized"
+          },
+          {
+            lineCode: "FX-RISK-001",
+            description: "Foreign Exchange Risk Fee",
+            agreementRate: "0.15%",
+            invoicedRate: "0.15%",
+            status: "matched"
+          }
+        ]
       },
       "2": {
         id: 2,
@@ -46,7 +69,16 @@ const AnomalyReview = () => {
         schemeProvider: "Visa",
         transactionVolume: "89,150",
         expectedAmount: "$1,069.80",
-        variance: "$133.45"
+        variance: "$133.45",
+        relatedFeeLines: [
+          {
+            lineCode: "NAF-001",
+            description: "Network Assessment Fee",
+            agreementRate: "0.12%",
+            invoicedRate: "0.14%",
+            status: "variance"
+          }
+        ]
       },
       "3": {
         id: 3,
@@ -60,7 +92,16 @@ const AnomalyReview = () => {
         schemeProvider: "Mastercard",
         transactionVolume: "12,450",
         expectedAmount: "$0.00",
-        variance: "$856.00"
+        variance: "$856.00",
+        relatedFeeLines: [
+          {
+            lineCode: "PIF-2024-NEW",
+            description: "Processing Integrity Fee (2024)",
+            agreementRate: "Not defined",
+            invoicedRate: "6.88 bps",
+            status: "new"
+          }
+        ]
       }
     };
     
@@ -231,6 +272,60 @@ const AnomalyReview = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Related Fee Lines from Agreement */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="w-5 h-5 text-blue-600" />
+              Related Fee Lines from Agreement
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {anomaly.relatedFeeLines?.map((feeLine: any, index: number) => (
+                <div key={index} className="border rounded-lg p-4 bg-slate-50">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <p className="font-semibold text-slate-900">{feeLine.lineCode}</p>
+                      <p className="text-sm text-slate-600">{feeLine.description}</p>
+                    </div>
+                    <Badge 
+                      variant={
+                        feeLine.status === 'matched' ? 'default' : 
+                        feeLine.status === 'variance' ? 'secondary' : 
+                        'destructive'
+                      }
+                      className={
+                        feeLine.status === 'matched' ? 'bg-green-100 text-green-800' :
+                        feeLine.status === 'variance' ? 'bg-yellow-100 text-yellow-800' :
+                        'bg-red-100 text-red-800'
+                      }
+                    >
+                      {feeLine.status === 'matched' ? 'MATCHED' : 
+                       feeLine.status === 'variance' ? 'VARIANCE' : 
+                       feeLine.status === 'unrecognized' ? 'UNRECOGNIZED' : 'NEW'}
+                    </Badge>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="text-slate-600">Agreement Rate</p>
+                      <p className={`font-medium ${feeLine.agreementRate === 'Not defined' ? 'text-red-600' : 'text-slate-900'}`}>
+                        {feeLine.agreementRate}
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-slate-600">Invoiced Rate</p>
+                      <p className={`font-medium ${feeLine.status === 'variance' || feeLine.status === 'unrecognized' || feeLine.status === 'new' ? 'text-red-600' : 'text-slate-900'}`}>
+                        {feeLine.invoicedRate}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </Layout>
   );
