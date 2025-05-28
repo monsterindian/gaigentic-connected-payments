@@ -1,4 +1,3 @@
-
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -31,6 +30,7 @@ const AnomalyReview = () => {
         detectedDate: "2024-01-15",
         schemeProvider: "Mastercard",
         transactionVolume: "45,230",
+        transactionAmount: "$9,874,550.00",
         expectedAmount: "$2,120.00",
         variance: "$727.50",
         relatedFeeLines: [
@@ -68,6 +68,7 @@ const AnomalyReview = () => {
         detectedDate: "2024-01-18",
         schemeProvider: "Visa",
         transactionVolume: "89,150",
+        transactionAmount: "$12,547,890.00",
         expectedAmount: "$1,069.80",
         variance: "$133.45",
         relatedFeeLines: [
@@ -91,6 +92,7 @@ const AnomalyReview = () => {
         detectedDate: "2024-01-20",
         schemeProvider: "Mastercard",
         transactionVolume: "12,450",
+        transactionAmount: "$3,254,780.00",
         expectedAmount: "$0.00",
         variance: "$856.00",
         relatedFeeLines: [
@@ -218,6 +220,10 @@ const AnomalyReview = () => {
                 <div className="bg-blue-50 p-4 rounded-lg">
                   <p className="text-sm font-medium text-slate-600">Transaction Volume</p>
                   <p className="text-2xl font-bold text-blue-600">{anomaly.transactionVolume}</p>
+                </div>
+                <div className="bg-green-50 p-4 rounded-lg md:col-span-2">
+                  <p className="text-sm font-medium text-slate-600">Total Transaction Amount</p>
+                  <p className="text-2xl font-bold text-green-600">{anomaly.transactionAmount}</p>
                 </div>
               </div>
               
