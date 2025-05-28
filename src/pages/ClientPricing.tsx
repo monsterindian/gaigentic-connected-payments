@@ -1,4 +1,3 @@
-
 import { Layout } from "@/components/Layout";
 import { DashboardHeader } from "@/components/DashboardHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,11 +19,6 @@ const ClientPricing = () => {
       merchant: "TechCorp LATAM",
       segment: "eCommerce",
       currentMargin: "2.1%",
-      recommendedMargin: "3.2%",
-      adjustments: [
-        "Cross-border fee: 0.75% → 0.90%",
-        "FX markup: 2.5% → 2.8%"
-      ],
       rationale: "High-risk profile justifies higher cross-border fee for FX exposure",
       priority: "high",
       aiConfidence: "92%",
@@ -36,10 +30,6 @@ const ClientPricing = () => {
       merchant: "RetailPlus EU",
       segment: "Retail",
       currentMargin: "3.8%",
-      recommendedMargin: "4.1%",
-      adjustments: [
-        "Interchange markup: 0.4% → 0.5%"
-      ],
       rationale: "Volume tier qualification allows for competitive rate adjustment",
       priority: "medium",
       aiConfidence: "88%",
@@ -51,10 +41,6 @@ const ClientPricing = () => {
       merchant: "FinServices Inc",
       segment: "Financial",
       currentMargin: "4.2%",
-      recommendedMargin: "4.5%",
-      adjustments: [
-        "Risk assessment fee: 0.25% → 0.35%"
-      ],
       rationale: "Regulatory compliance costs require margin adjustment",
       priority: "low",
       aiConfidence: "85%",
@@ -287,14 +273,10 @@ const ClientPricing = () => {
                         </Badge>
                       </div>
                       
-                      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-3">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-3">
                         <div>
                           <p className="text-sm text-slate-600">Current Margin</p>
                           <p className="text-lg font-semibold text-red-600">{rec.currentMargin}</p>
-                        </div>
-                        <div>
-                          <p className="text-sm text-slate-600">AI Recommended Margin</p>
-                          <p className="text-lg font-semibold text-green-600">{rec.recommendedMargin}</p>
                         </div>
                         <div>
                           <p className="text-sm text-slate-600">Predicted Impact</p>
@@ -304,21 +286,6 @@ const ClientPricing = () => {
                           <p className="text-sm text-slate-600">Churn Risk</p>
                           <p className="text-lg font-semibold text-orange-600">{rec.churnRisk}</p>
                         </div>
-                      </div>
-                      
-                      <div className="mb-3">
-                        <p className="text-sm font-medium text-slate-700 mb-1 flex items-center gap-1">
-                          <Bot className="w-3 h-3" />
-                          AI Suggested Adjustments:
-                        </p>
-                        <ul className="text-sm text-slate-600 space-y-1">
-                          {rec.adjustments.map((adj, idx) => (
-                            <li key={idx} className="flex items-center gap-2">
-                              <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
-                              {adj}
-                            </li>
-                          ))}
-                        </ul>
                       </div>
                       
                       <div className="bg-blue-50 p-3 rounded-lg">
