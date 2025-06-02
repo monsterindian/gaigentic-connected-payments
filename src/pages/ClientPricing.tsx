@@ -19,7 +19,7 @@ const ClientPricing = () => {
       merchant: "TechCorp LATAM",
       segment: "eCommerce",
       currentMargin: "2.1%",
-      rationale: "High-risk profile justifies higher cross-border fee for FX exposure",
+      rationale: "High-risk profile incurs higher cross-border fee for FX exposure",
       priority: "high",
       aiConfidence: "92%",
       predictedImpact: "+$24K/month",
