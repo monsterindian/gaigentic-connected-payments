@@ -109,13 +109,6 @@ const Index = () => {
       time: "15 minutes ago",
       impact: "+$18K/month",
       confidence: "94%"
-    },
-    {
-      agent: "Margin Agent",
-      action: "Completed quarterly scenario analysis",
-      time: "1 hour ago",
-      impact: "Risk reduced 23%",
-      confidence: "91%"
     }
   ];
 
